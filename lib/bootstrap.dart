@@ -10,6 +10,9 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_todos/app/app.dart';
+import 'package:todos_api/todos_api.dart';
+import 'package:todos_repository/todos_repository.dart';
 
 class AppBlocObserver extends BlocObserver {
   @override
@@ -25,18 +28,39 @@ class AppBlocObserver extends BlocObserver {
   }
 }
 
-Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
+void bootstrap({required TodosApi todosApi}) {
   FlutterError.onError = (details) {
     log(details.exceptionAsString(), stackTrace: details.stack);
   };
 
-  await runZonedGuarded(
+  final todosRepository = TodosRepository(todosApi: todosApi);
+
+  runZonedGuarded(
     () async {
       await BlocOverrides.runZoned(
-        () async => runApp(await builder()),
+        () async => runApp(App(todosRepository: todosRepository)),
         blocObserver: AppBlocObserver(),
       );
     },
     (error, stackTrace) => log(error.toString(), stackTrace: stackTrace),
   );
 }
+
+
+
+// Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
+//   FlutterError.onError = (details) {
+//     log(details.exceptionAsString(), stackTrace: details.stack);
+//   };
+
+//   await runZonedGuarded(
+//     () async {
+//       await BlocOverrides.runZoned(
+//         () async => runApp(await builder()),
+//         blocObserver: AppBlocObserver(),
+//       );
+//     },
+//     (error, stackTrace) => log(error.toString(), stackTrace: stackTrace),
+//   );
+// }
+
