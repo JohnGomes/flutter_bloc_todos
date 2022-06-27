@@ -4,13 +4,16 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_todos/todos_overview/todos_overview.dart' hide TodosViewFilter;
+import 'package:flutter_todos/todos_overview/todos_overview.dart'
+    hide TodosViewFilter;
 import 'package:mocktail/mocktail.dart';
 import 'package:todos_repository/todos_repository.dart';
 
 import '../../helpers/helpers.dart';
 
-class MockTodosOverviewBloc extends MockBloc<TodosOverviewEvent, TodosOverviewState> implements TodosOverviewBloc {}
+class MockTodosOverviewBloc
+    extends MockBloc<TodosOverviewEvent, TodosOverviewState>
+    implements TodosOverviewBloc {}
 
 extension on CommonFinders {
   Finder optionMenuItem({
@@ -79,7 +82,8 @@ void main() {
 
       group('mark all todos button', () {
         testWidgets('is disabled when there are no todos', (tester) async {
-          when(() => todosOverviewBloc.state).thenReturn(const TodosOverviewState(todos: []));
+          when(() => todosOverviewBloc.state)
+              .thenReturn(const TodosOverviewState(todos: []));
           await tester.pumpApp(buildSubject());
           await tester.openPopup();
 
@@ -163,7 +167,8 @@ void main() {
             );
 
             verify(
-              () => todosOverviewBloc.add(const TodosOverviewToggleAllRequested()),
+              () => todosOverviewBloc
+                  .add(const TodosOverviewToggleAllRequested()),
             ).called(1);
           },
         );
@@ -173,7 +178,8 @@ void main() {
         testWidgets(
           'is disabled when there are no completed todos',
           (tester) async {
-            when(() => todosOverviewBloc.state).thenReturn(const TodosOverviewState(todos: []));
+            when(() => todosOverviewBloc.state)
+                .thenReturn(const TodosOverviewState(todos: []));
             await tester.pumpApp(buildSubject());
             await tester.openPopup();
 
@@ -235,7 +241,8 @@ void main() {
             );
 
             verify(
-              () => todosOverviewBloc.add(const TodosOverviewClearCompletedRequested()),
+              () => todosOverviewBloc
+                  .add(const TodosOverviewClearCompletedRequested()),
             ).called(1);
           },
         );

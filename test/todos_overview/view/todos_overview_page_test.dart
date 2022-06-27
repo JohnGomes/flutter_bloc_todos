@@ -11,7 +11,9 @@ import '../../helpers/helpers.dart';
 
 class MockTodosRepository extends Mock implements TodosRepository {}
 
-class MockTodosOverviewBloc extends MockBloc<TodosOverviewEvent, TodosOverviewState> implements TodosOverviewBloc {}
+class MockTodosOverviewBloc
+    extends MockBloc<TodosOverviewEvent, TodosOverviewState>
+    implements TodosOverviewBloc {}
 
 void main() {
   final mockTodos = [
@@ -298,7 +300,8 @@ void main() {
 
           final todo = mockTodos.first;
 
-          final todoListTile = tester.widget<TodoListTile>(find.byType(TodoListTile).first);
+          final todoListTile =
+              tester.widget<TodoListTile>(find.byType(TodoListTile).first);
           todoListTile.onToggleCompleted!(!todo.isCompleted);
 
           verify(

@@ -46,8 +46,6 @@ void bootstrap({required TodosApi todosApi}) {
   );
 }
 
-
-
 // Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
 //   FlutterError.onError = (details) {
 //     log(details.exceptionAsString(), stackTrace: details.stack);
@@ -63,4 +61,3 @@ void bootstrap({required TodosApi todosApi}) {
 //     (error, stackTrace) => log(error.toString(), stackTrace: stackTrace),
 //   );
 // }
-

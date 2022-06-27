@@ -56,7 +56,9 @@ class TodoListTile extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(8)),
           ),
           value: todo.isCompleted,
-          onChanged: onToggleCompleted == null ? null : (value) => onToggleCompleted!(value!),
+          onChanged: onToggleCompleted == null
+              ? null
+              : (value) => onToggleCompleted!(value!),
         ),
         trailing: onTap == null ? null : const Icon(Icons.chevron_right),
       ),

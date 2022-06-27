@@ -198,7 +198,9 @@ void main() {
         },
         build: buildBloc,
         seed: () => TodosOverviewState(
-          todos: mockTodos.map((todo) => todo.copyWith(isCompleted: true)).toList(),
+          todos: mockTodos
+              .map((todo) => todo.copyWith(isCompleted: true))
+              .toList(),
         ),
         act: (bloc) => bloc.add(const TodosOverviewToggleAllRequested()),
         verify: (_) {

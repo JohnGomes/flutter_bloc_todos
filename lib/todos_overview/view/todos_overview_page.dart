@@ -38,7 +38,8 @@ class TodosOverviewView extends StatelessWidget {
       body: MultiBlocListener(
         listeners: [
           BlocListener<TodosOverviewBloc, TodosOverviewState>(
-            listenWhen: (previous, current) => previous.status != current.status,
+            listenWhen: (previous, current) =>
+                previous.status != current.status,
             listener: (context, state) {
               if (state.status == TodosOverviewStatus.failure) {
                 ScaffoldMessenger.of(context)
@@ -52,7 +53,9 @@ class TodosOverviewView extends StatelessWidget {
             },
           ),
           BlocListener<TodosOverviewBloc, TodosOverviewState>(
-            listenWhen: (previous, current) => previous.lastDeletedTodo != current.lastDeletedTodo && current.lastDeletedTodo != null,
+            listenWhen: (previous, current) =>
+                previous.lastDeletedTodo != current.lastDeletedTodo &&
+                current.lastDeletedTodo != null,
             listener: (context, state) {
               final deletedTodo = state.lastDeletedTodo!;
               final messenger = ScaffoldMessenger.of(context);
@@ -69,7 +72,9 @@ class TodosOverviewView extends StatelessWidget {
                       label: l10n.todosOverviewUndoDeletionButtonText,
                       onPressed: () {
                         messenger.hideCurrentSnackBar();
-                        context.read<TodosOverviewBloc>().add(const TodosOverviewUndoDeletionRequested());
+                        context
+                            .read<TodosOverviewBloc>()
+                            .add(const TodosOverviewUndoDeletionRequested());
                       },
                     ),
                   ),
@@ -109,7 +114,9 @@ class TodosOverviewView extends StatelessWidget {
                             );
                       },
                       onDismissed: (_) {
-                        context.read<TodosOverviewBloc>().add(TodosOverviewTodoDeleted(todo));
+                        context
+                            .read<TodosOverviewBloc>()
+                            .add(TodosOverviewTodoDeleted(todo));
                       },
                       onTap: () {
                         Navigator.of(context).push(

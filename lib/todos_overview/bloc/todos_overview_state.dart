@@ -27,7 +27,8 @@ class TodosOverviewState extends Equatable {
       status: status != null ? status() : this.status,
       todos: todos != null ? todos() : this.todos,
       filter: filter != null ? filter() : this.filter,
-      lastDeletedTodo: lastDeletedTodo != null ? lastDeletedTodo() : this.lastDeletedTodo,
+      lastDeletedTodo:
+          lastDeletedTodo != null ? lastDeletedTodo() : this.lastDeletedTodo,
     );
   }
 

@@ -8,7 +8,8 @@ import 'package:todos_repository/todos_repository.dart';
 
 import '../../helpers/helpers.dart';
 
-class MockStatsBloc extends MockBloc<StatsEvent, StatsState> implements StatsBloc {}
+class MockStatsBloc extends MockBloc<StatsEvent, StatsState>
+    implements StatsBloc {}
 
 void main() {
   group('StatsPage', () {

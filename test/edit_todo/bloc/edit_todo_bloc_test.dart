@@ -55,7 +55,8 @@ void main() {
       blocTest<EditTodoBloc, EditTodoState>(
         'emits new state with updated description',
         build: buildBloc,
-        act: (bloc) => bloc.add(const EditTodoDescriptionChanged('newdescription')),
+        act: (bloc) =>
+            bloc.add(const EditTodoDescriptionChanged('newdescription')),
         expect: () => const [
           EditTodoState(description: 'newdescription'),
         ],
@@ -91,7 +92,9 @@ void main() {
           verify(
             () => todosRepository.saveTodo(
               any(
-                that: isA<Todo>().having((t) => t.title, 'title', equals('title')).having(
+                that: isA<Todo>()
+                    .having((t) => t.title, 'title', equals('title'))
+                    .having(
                       (t) => t.description,
                       'description',
                       equals('description'),
@@ -142,7 +145,10 @@ void main() {
           verify(
             () => todosRepository.saveTodo(
               any(
-                that: isA<Todo>().having((t) => t.id, 'id', equals('initial-id')).having((t) => t.title, 'title', equals('title')).having(
+                that: isA<Todo>()
+                    .having((t) => t.id, 'id', equals('initial-id'))
+                    .having((t) => t.title, 'title', equals('title'))
+                    .having(
                       (t) => t.description,
                       'description',
                       equals('description'),
@@ -156,7 +162,8 @@ void main() {
       blocTest<EditTodoBloc, EditTodoState>(
         'emits new state with error if save to repository fails',
         build: () {
-          when(() => todosRepository.saveTodo(any())).thenThrow(Exception('oops'));
+          when(() => todosRepository.saveTodo(any()))
+              .thenThrow(Exception('oops'));
           return buildBloc();
         },
         seed: () => const EditTodoState(

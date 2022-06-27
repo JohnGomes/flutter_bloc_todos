@@ -25,10 +25,14 @@ class TodosOverviewOptionsButton extends StatelessWidget {
       onSelected: (options) {
         switch (options) {
           case TodosOverviewOption.toggleAll:
-            context.read<TodosOverviewBloc>().add(const TodosOverviewToggleAllRequested());
+            context
+                .read<TodosOverviewBloc>()
+                .add(const TodosOverviewToggleAllRequested());
             break;
           case TodosOverviewOption.clearCompleted:
-            context.read<TodosOverviewBloc>().add(const TodosOverviewClearCompletedRequested());
+            context
+                .read<TodosOverviewBloc>()
+                .add(const TodosOverviewClearCompletedRequested());
         }
       },
       itemBuilder: (context) {
@@ -37,7 +41,9 @@ class TodosOverviewOptionsButton extends StatelessWidget {
             value: TodosOverviewOption.toggleAll,
             enabled: hasTodos,
             child: Text(
-              completedTodosAmount == todos.length ? l10n.todosOverviewOptionsMarkAllIncomplete : l10n.todosOverviewOptionsMarkAllComplete,
+              completedTodosAmount == todos.length
+                  ? l10n.todosOverviewOptionsMarkAllIncomplete
+                  : l10n.todosOverviewOptionsMarkAllComplete,
             ),
           ),
           PopupMenuItem(

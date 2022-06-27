@@ -8,7 +8,8 @@ import 'package:todos_repository/todos_repository.dart';
 
 import '../../helpers/helpers.dart';
 
-class MockEditTodoBloc extends MockBloc<EditTodoEvent, EditTodoState> implements EditTodoBloc {}
+class MockEditTodoBloc extends MockBloc<EditTodoEvent, EditTodoState>
+    implements EditTodoBloc {}
 
 void main() {
   final mockTodo = Todo(
@@ -97,7 +98,8 @@ void main() {
 
   group('EditTodoView', () {
     const titleTextFormField = Key('editTodoView_title_textFormField');
-    const descriptionTextFormField = Key('editTodoView_description_textFormField');
+    const descriptionTextFormField =
+        Key('editTodoView_description_textFormField');
 
     Widget buildSubject() {
       return MockNavigatorProvider(
@@ -164,7 +166,8 @@ void main() {
         );
         await tester.pumpApp(buildSubject());
 
-        final textField = tester.widget<TextFormField>(find.byKey(descriptionTextFormField));
+        final textField =
+            tester.widget<TextFormField>(find.byKey(descriptionTextFormField));
         expect(textField.enabled, false);
       });
 
@@ -201,7 +204,8 @@ void main() {
         );
         await tester.pumpApp(buildSubject());
 
-        final textField = tester.widget<TextFormField>(find.byKey(titleTextFormField));
+        final textField =
+            tester.widget<TextFormField>(find.byKey(titleTextFormField));
         expect(textField.enabled, false);
       });
 
@@ -217,7 +221,8 @@ void main() {
           );
 
           verify(
-            () => editTodoBloc.add(const EditTodoDescriptionChanged('newdescription')),
+            () => editTodoBloc
+                .add(const EditTodoDescriptionChanged('newdescription')),
           ).called(1);
         },
       );

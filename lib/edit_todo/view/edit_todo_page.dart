@@ -25,7 +25,9 @@ class EditTodoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<EditTodoBloc, EditTodoState>(
-      listenWhen: (previous, current) => previous.status != current.status && current.status == EditTodoStatus.success,
+      listenWhen: (previous, current) =>
+          previous.status != current.status &&
+          current.status == EditTodoStatus.success,
       listener: (context, state) => Navigator.of(context).pop(),
       child: const EditTodoView(),
     );
@@ -44,12 +46,15 @@ class EditTodoView extends StatelessWidget {
     );
     final theme = Theme.of(context);
     final floatingActionButtonTheme = theme.floatingActionButtonTheme;
-    final fabBackgroundColor = floatingActionButtonTheme.backgroundColor ?? theme.colorScheme.secondary;
+    final fabBackgroundColor = floatingActionButtonTheme.backgroundColor ??
+        theme.colorScheme.secondary;
 
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          isNewTodo ? l10n.editTodoAddAppBarTitle : l10n.editTodoEditAppBarTitle,
+          isNewTodo
+              ? l10n.editTodoAddAppBarTitle
+              : l10n.editTodoEditAppBarTitle,
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -57,9 +62,15 @@ class EditTodoView extends StatelessWidget {
         shape: const ContinuousRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(32)),
         ),
-        backgroundColor: status.isLoadingOrSuccess ? fabBackgroundColor.withOpacity(0.5) : fabBackgroundColor,
-        onPressed: status.isLoadingOrSuccess ? null : () => context.read<EditTodoBloc>().add(const EditTodoSubmitted()),
-        child: status.isLoadingOrSuccess ? const CupertinoActivityIndicator() : const Icon(Icons.check_rounded),
+        backgroundColor: status.isLoadingOrSuccess
+            ? fabBackgroundColor.withOpacity(0.5)
+            : fabBackgroundColor,
+        onPressed: status.isLoadingOrSuccess
+            ? null
+            : () => context.read<EditTodoBloc>().add(const EditTodoSubmitted()),
+        child: status.isLoadingOrSuccess
+            ? const CupertinoActivityIndicator()
+            : const Icon(Icons.check_rounded),
       ),
       body: CupertinoScrollbar(
         child: SingleChildScrollView(

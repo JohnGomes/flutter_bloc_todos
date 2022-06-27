@@ -134,7 +134,8 @@ void main() {
             findsOneWidget,
           );
 
-          final addTodoFloatingActionButton = tester.widget(find.byKey(addTodoFloatingActionButtonKey));
+          final addTodoFloatingActionButton =
+              tester.widget(find.byKey(addTodoFloatingActionButtonKey));
           expect(
             addTodoFloatingActionButton,
             isA<FloatingActionButton>(),

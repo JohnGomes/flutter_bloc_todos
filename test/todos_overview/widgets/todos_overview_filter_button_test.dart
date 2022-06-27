@@ -9,7 +9,9 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../helpers/helpers.dart';
 
-class MockTodosOverviewBloc extends MockBloc<TodosOverviewEvent, TodosOverviewState> implements TodosOverviewBloc {}
+class MockTodosOverviewBloc
+    extends MockBloc<TodosOverviewEvent, TodosOverviewState>
+    implements TodosOverviewBloc {}
 
 extension on CommonFinders {
   Finder filterMenuItem({
