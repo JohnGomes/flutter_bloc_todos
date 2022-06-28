@@ -9,49 +9,25 @@
 #       flutter_channel: stable
 #       flutter_version: 3.0.0
 
-name: Flutter Package Workflow
+name: flutter_todos
 
-on:
-  workflow_call:
-    inputs:
-      concurrency:
-        required: false
-        type: number
-        default: 4
-      coverage_excludes:
-        required: false
-        type: string
-        default: ""
-      flutter_channel:
-        required: false
-        type: string
-        default: "stable"
-      flutter_version:
-        required: false
-        type: string
-        default: ""
-      working_directory:
-        required: false
-        type: string
-        default: "."
-      min_coverage:
-        required: false
-        type: number
-        default: 100
-      test_optimization:
-        required: false
-        type: boolean
-        default: true
-      test_recursion:
-        required: false
-        type: boolean
-        default: false
+on: [push, pull_request]
+
+env:
+  concurrency: 4
+  coverage_excludes: ""
+  flutter_channel: "stable"
+  flutter_version: "3.0.0"
+  working_directory: "."
+  min_coverage: 100
+  test_optimization: true
+  test_recursion: false
 
 jobs:
   build:
     defaults:
       run:
-        working-directory: ${{inputs.working_directory}}
+        working-directory: "${{ env.working_directory }}"
 
     runs-on: ubuntu-latest
 
@@ -62,8 +38,8 @@ jobs:
       - name: 🐦 Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: ${{inputs.flutter_version}}
-          channel: ${{inputs.flutter_channel}}
+          flutter-version: "${{ env.flutter_version }}"
+          channel: "${{ env.flutter_channel }}"
           cache: true
 
       - name: 📦 Install Dependencies
@@ -81,12 +57,12 @@ jobs:
         run: flutter analyze lib test
 
       - name: 🧪 Run Tests
-        run: very_good test -j ${{inputs.concurrency}} ${{(inputs.test_recursion && '--recursive') || ''}} ${{(inputs.test_optimization && '--optimization') || '--no-optimization'}} --coverage --test-randomize-ordering-seed random
+        run: very_good test -j "${{ env.concurrency }}" "${{ (env.test_recursion && '--recursive') || '' }}" "${{ (env.test_optimization && '--optimization') || '--no-optimization' }}" --coverage --test-randomize-ordering-seed random
 
       - name: 📊 Check Code Coverage
         continue-on-error: true
         uses: VeryGoodOpenSource/very_good_coverage@v1
         with:
-          path: ${{inputs.working_directory}}/coverage/lcov.info
-          exclude: ${{inputs.coverage_excludes}}
-          min_coverage: ${{inputs.min_coverage}}
+          path: "${{ env.working_directory }}/coverage/lcov.info"
+          exclude: "${{ env.coverage_excludes }}"
+          min_coverage: "${{ env.min_coverage }}"
